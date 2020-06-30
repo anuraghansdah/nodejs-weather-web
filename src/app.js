@@ -58,11 +58,14 @@ app.get('/weather',(req,res)=>{
     forecast(latitutde,longitude,(error, forecastData)=>{
       if(error)
       return res.send({error})
-      const {lat, lon}=forecastData.coord;
+    //  const {lat, lon}=forecastData.coord;
       res.send({
         coord:forecastData.coord,
         forecastData:forecastData.weather[0].description,
-        address:req.query.address
+        address:req.query.address,
+        currentTeperature : forecastData.main.temp,
+        maximumTeperature : forecastData.main.temp_max,
+        minimumTeperature : forecastData.main.temp_min
       })
     })
 
